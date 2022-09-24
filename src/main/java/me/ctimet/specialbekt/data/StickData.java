@@ -19,12 +19,11 @@ public class StickData {
     private static final Timer TIMER = new Timer();
     private static final Config CONFIG = Main.getCfg();
 
-    private static final File TEMP_DAT = new File("plugins/BedrockTechnology/temp.dat");
+    private static final File TEMP_DAT = new File("plugins/SpecialBekt/temp.dat");
     private static final File BLOCK_DAT = PluginData.getBlockDat();
 
-    private static HashMap<String, PlayerBlock> RegisterBlockData = new HashMap<>();
+    private static HashMap<String, String> RegisterBlockData = new HashMap<>();
     private static boolean ReadFinish = false;
-    private static boolean ThrowException = false;
     private static int WaitListSize = 0;
 
     /**
@@ -54,16 +53,6 @@ public class StickData {
             return;
         }
         saveRegisterBlockData(BLOCK_DAT);
-    }
-
-    /**
-     * <p>这个方法仅在op使用</p>
-     * <p>/bedrocktechnology(bekt) reload</p>
-     * <p>时调用</p>
-     */
-    public static void reloadData() {
-        if (ReadFinish) ReadFinish = false;
-        readData();
     }
 
     /**
@@ -141,39 +130,22 @@ public class StickData {
     /**
      * 得到方块数据
      * @param key 通过坐标计算得来的key
-     * @return 方块的BlockData
+     * @return 方块数据
      */
     
-    public static PlayerBlock getBlockData(String key) {
+    public static String getBlockData(String key) {
         return RegisterBlockData.get(key);
     }
 
     /**
      * 向RegisterBlockData中放置方块数据
      * @param key 通过坐标计算得来的关键字
-     * @param value 方块的BlockData
+     * @param value 方块数据
      */
-    public static void putBlockData(String key, PlayerBlock value) {
+    public static void putBlockData(String key, String value) {
         RegisterBlockData.put(key,value);
         addWait();
     }
-
-    /**
-     * 这个方法将返回是否未读取完成
-     * @return 是否仍然未读取完成
-     */
-    public static boolean isNotReadFinish() {
-        return !ReadFinish;
-    }
-
-    /**
-     * return now read situation
-     * @return read situation, a String
-     */
-    public static String getReadSituation() {
-        return ThrowException ? "读取发生异常，请向管理汇报" : (ReadFinish ? "读取完成" : "读取尚未完成，请稍加等待");
-    }
-
     /**
      * read the register data
      * @param file file for save register data
@@ -181,7 +153,7 @@ public class StickData {
     @SuppressWarnings("unchecked")
     private static void readRegisterBlockData(File file) {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file))) {
-            RegisterBlockData = (HashMap<String, PlayerBlock>) in.readObject();
+            RegisterBlockData = (HashMap<String, String>) in.readObject();
             ReadFinish = true;
         } catch (EOFException e) {
             //出现 EOF 往往都是文件第一次创建时导致的，此时我们只需把RegisterBlockData初始化即可，无需打印堆栈
@@ -189,7 +161,6 @@ public class StickData {
             ReadFinish = true;
         } catch (IOException | ClassNotFoundException e) {
             ExceptionHandler.writeException(e, "readRegisterBlockData", "在读取注册数据时抛出异常", StickData.class);
-            ThrowException = true;
         }
     }
 

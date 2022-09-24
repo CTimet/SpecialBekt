@@ -1,7 +1,7 @@
 name: SpecialBekt
 author: CTimet
 description: A generic Slimefun4-Addon
-main: me.ctimet.specialbekt
+main: me.ctimet.specialbekt.Main
 website: https://github.com/CTimet/SpecialBekt
 version: ${project.version}
 api-version: 1.17

@@ -1,7 +1,6 @@
 package me.ctimet.specialbekt.items;
 
 import me.ctimet.specialbekt.log.Chat;
-import me.ctimet.specialbekt.data.PlayerBlock;
 import me.ctimet.specialbekt.data.StickData;
 import me.ctimet.specialbekt.log.Color;
 import io.github.thebusybiscuit.slimefun4.api.events.PlayerRightClickEvent;
@@ -44,8 +43,6 @@ public class RegisterStick extends SlimefunItem {
             return;
         }
 
-        String Json = BlockStorage.getBlockInfoAsJson(block);
-
         Location location = block.getLocation();
         String xyz = location.getX() + "&" + location.getY() + "&" + location.getZ() + "&" + Objects.requireNonNull(location.getWorld()).getName();
 
@@ -54,8 +51,7 @@ public class RegisterStick extends SlimefunItem {
             return;
         }
 
-        PlayerBlock pb = new PlayerBlock(Json, block.getType());
-        StickData.putBlockData(xyz, pb);
+        StickData.putBlockData(xyz, BlockStorage.getBlockInfoAsJson(block));
 
         chat.sendMessageWithoutHead("方块已成功注册", Color.GREEN);
     }

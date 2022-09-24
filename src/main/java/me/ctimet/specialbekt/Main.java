@@ -1,30 +1,34 @@
 package me.ctimet.specialbekt;
 
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
-import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.config.Config;
-import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
+import me.ctimet.specialbekt.data.StickData;
 import net.guizhanss.guizhanlib.updater.GuizhanBuildsUpdater;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin implements SlimefunAddon {
     private static Main instance;
     private static Config cfg;
-    private static final ItemGroup SPECIAL_BEKT_ITEM_GROUP = new ItemGroup(new NamespacedKey(Main.getInstance(), "SPECIAL_BEKT_ITEM_GROUP"), new CustomItemStack(Material.BEDROCK, "&lSpecialBekt"));
     @Override
     public void onEnable() {
         instance = this;
         cfg = new Config(this);
+        saveDefaultConfig();
+        saveResource("block.dat", false);
+        BItemGroup.register();
         BItems.registerItems();
-        if (cfg.getBoolean("options.check-update"))
-            new GuizhanBuildsUpdater(instance, getFile(), "CTimet", "SpecialBekt", "master", false).start();
+        StickData.readData();
+        StickData.startTimer();
+        Bukkit.getPluginManager().registerEvents(new MachineProtectListener(), this);
+//        if (cfg.getBoolean("options.check-update"))
+//            new GuizhanBuildsUpdater(instance, getFile(), "CTimet", "SpecialBekt", "master", false).start();
     }
 
     @Override
     public void onDisable() {
-
+        StickData.stopTimer();
+        StickData.saveData();
     }
 
     public static Config getCfg() {
@@ -33,10 +37,6 @@ public class Main extends JavaPlugin implements SlimefunAddon {
 
     public static Main getInstance() {
         return instance;
-    }
-
-    public static ItemGroup getSpecialBektItemGroup() {
-        return SPECIAL_BEKT_ITEM_GROUP;
     }
 
     @Override

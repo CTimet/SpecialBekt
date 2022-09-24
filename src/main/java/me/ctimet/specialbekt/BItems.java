@@ -30,7 +30,7 @@ public class BItems {
     );
     public static void registerItems() {
         new RegisterStick(
-                Main.getSpecialBektItemGroup(),
+                BItemGroup.getSpecialBektItemGroup(),
                 SPECIAL_BEKT_SUPERFIX_REG,
                 RecipeType.ENHANCED_CRAFTING_TABLE,
                 new ItemStack[] {
@@ -40,7 +40,7 @@ public class BItems {
                 }
         ).register(Main.getInstance());
         new FixStick(
-                Main.getSpecialBektItemGroup(),
+                BItemGroup.getSpecialBektItemGroup(),
                 SPECIAL_BEKT_SUPERFIX_FIX,
                 RecipeType.ENHANCED_CRAFTING_TABLE,
                 new ItemStack[] {

@@ -1,6 +1,5 @@
 package me.ctimet.specialbekt.log;
 
-import me.ctimet.specialbekt.chat.Color;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
