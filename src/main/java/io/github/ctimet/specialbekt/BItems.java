@@ -1,9 +1,10 @@
-package me.ctimet.specialbekt;
+package io.github.ctimet.specialbekt;
 
+import io.github.ctimet.specialbekt.items.FixAllStick;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
-import me.ctimet.specialbekt.items.FixStick;
-import me.ctimet.specialbekt.items.RegisterStick;
+import io.github.ctimet.specialbekt.items.FixStick;
+import io.github.ctimet.specialbekt.items.RegisterStick;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -28,6 +29,16 @@ public class BItems {
             "&7前提是你的机器必须已经经过 &b超级修复-注册 &7注册",
             "&7未被注册的机器将&4修复失败！"
     );
+    public static final SlimefunItemStack BEKT_FIX_ALL = new SlimefunItemStack(
+            "BEKT_FIX_ALL",
+            Material.STICK,
+            "&a超级修复-修复全部",
+            "",
+            "&7修复你的机器",
+            "&7当你使用时，插件会找出你所有经过 &b超级修复-注册 &7注册过的机器",
+            "&7并从中找出已经损坏的机器，然后修复，修复后注册信息将会删除，需再次注册。",
+            "&7未被注册的机器将&4不会被修复！"
+    );
     public static void registerItems() {
         new RegisterStick(
                 BItemGroup.getSpecialBektItemGroup(),
@@ -38,7 +49,7 @@ public class BItems {
                         null, item(Material.STONE), null,
                         null, item(Material.STONE), null
                 }
-        ).register(Main.getInstance());
+        ).register(BektMain.getInstance());
         new FixStick(
                 BItemGroup.getSpecialBektItemGroup(),
                 SPECIAL_BEKT_SUPERFIX_FIX,
@@ -48,7 +59,17 @@ public class BItems {
                         null, item(Material.REDSTONE), null,
                         null, item(Material.REDSTONE), null
                 }
-        ).register(Main.getInstance());
+        ).register(BektMain.getInstance());
+        new FixAllStick(
+                BItemGroup.getSpecialBektItemGroup(),
+                BEKT_FIX_ALL,
+                RecipeType.ENHANCED_CRAFTING_TABLE,
+                new ItemStack[] {
+                        null, SPECIAL_BEKT_SUPERFIX_REG, null,
+                        null, SPECIAL_BEKT_SUPERFIX_REG, null,
+                        null, SPECIAL_BEKT_SUPERFIX_REG, null
+                }
+        ).register(BektMain.getInstance());
     }
     private static ItemStack item(Material material) {
         return new ItemStack(material);

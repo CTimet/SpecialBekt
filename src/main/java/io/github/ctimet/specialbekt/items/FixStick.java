@@ -1,14 +1,14 @@
-package me.ctimet.specialbekt.items;
+package io.github.ctimet.specialbekt.items;
 
+import io.github.ctimet.specialbekt.log.Chat;
+import io.github.ctimet.specialbekt.log.Color;
+import io.github.ctimet.specialbekt.data.stickdata.StickData;
 import io.github.thebusybiscuit.slimefun4.api.events.PlayerRightClickEvent;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
-import me.ctimet.specialbekt.data.StickData;
-import me.ctimet.specialbekt.log.Chat;
-import me.ctimet.specialbekt.log.Color;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -37,14 +37,20 @@ public class FixStick extends SlimefunItem {
             chat.sendMessageWithoutHead("插件认为该方块未损坏，不可修复！", Color.YELLOW);
             return;
         }
+
+        if (StickData.isNotReadFinish()) {
+            chat.sendWarn("抱歉，注册修复系统暂时没有读取完数据。待读取完再进行注册操作吧");
+            return;
+        }
+
         Location location = block.getLocation();
 
         String xyz = location.getX() + "&" + location.getY() + "&" + location.getZ() + "&" + Objects.requireNonNull(location.getWorld()).getName();
 
-        String json = StickData.getBlockData(xyz);
+        String json = StickData.getData(xyz);
         if (json != null) {
             BlockStorage.setBlockInfo(block, json, true);
-            StickData.remove(xyz);
+            StickData.removeData(xyz);
             chat.sendInfo("方块已被修复");
         } else {
             chat.sendErr("该方块未被注册，不可修复！");

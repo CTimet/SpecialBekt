@@ -1,11 +1,11 @@
-package me.ctimet.specialbekt.log;
+package io.github.ctimet.specialbekt.log;
 
-import me.ctimet.specialbekt.Main;
+import io.github.ctimet.specialbekt.BektMain;
 
 import java.util.logging.Logger;
 
 public class Log {
-    private static final Logger log = Main.getInstance().getLogger();
+    private static final Logger log = BektMain.getInstance().getLogger();
     public static void info(String mes) {
         log.info(mes);
     }

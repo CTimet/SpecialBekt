@@ -1,7 +1,7 @@
-package me.ctimet.specialbekt.log;
+package io.github.ctimet.specialbekt.log;
 
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
-import me.ctimet.specialbekt.Main;
+import io.github.ctimet.specialbekt.BektMain;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -24,8 +24,8 @@ public final class ExceptionHandler {
         String fileName = time + ".err";
 
         File file = new File("");
-        File make = new File(file.getAbsolutePath() + File.separator + "SpecialBedrockTechnologyErr" + File.separator + "err" + File.separator + fileName);
-        Log.warn("数据保存时发生异常！已将异常保存至服务器根目录下的 BedrockTechnologyErr/err/" + fileName + " 文件中！");
+        File make = new File(file.getAbsolutePath() + File.separator + "SpecialspecialbektErr" + File.separator + "err" + File.separator + fileName);
+        Log.warn("数据保存时发生异常！已将异常保存至服务器根目录下的 specialbektErr/err/" + fileName + " 文件中！");
         File fileParent = make.getParentFile();
         try {
             if (!fileParent.exists())
@@ -36,11 +36,11 @@ public final class ExceptionHandler {
 
             //插件信息
             String sf_version = Slimefun.getVersion();
-            String bekt_version = Main.getInstance().getPluginVersion();
+            String bekt_version = BektMain.getInstance().getPluginVersion();
 
             //输出插件信息
             print.println("当前使用的Slimefun版本: " + sf_version);
-            print.println("当前使用的BedrockTechnology版本: " + bekt_version);
+            print.println("当前使用的specialbekt版本: " + bekt_version);
             print.println("出现问题的类: " + c.getName());
             print.println("出现问题的方法: " + eMethod);
             print.println("问题描述: " + eMes);

@@ -1,4 +1,4 @@
-# 关于Config.yml配置文件解析详情请见 https://www.yuque.com/ctimet/bedrocktechnologywiki/az3bgr
+# 关于Config.yml配置文件解析详情请见 https://www.yuque.com/ctimet/specialbektwiki/az3bgr
 options:
   check-update: true
   auto-register: false
@@ -7,7 +7,6 @@ timer:
   delay: 10
   period: 10
 
-#MySQL服务暂不可用，等待未来版本加入MySQL支持
 mysql:
   enabled: false
   host: localhost

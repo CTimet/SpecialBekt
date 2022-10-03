@@ -1,4 +1,4 @@
-package me.ctimet.specialbekt.log;
+package io.github.ctimet.specialbekt.log;
 
 public class Color {
     /** 深红 */

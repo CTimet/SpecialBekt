@@ -1,4 +1,4 @@
-package me.ctimet.specialbekt.log;
+package io.github.ctimet.specialbekt.log;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -20,19 +20,19 @@ public class Chat {
     }
 
     public void sendWarn(String mes) {
-        this.sender.sendMessage(Color.YELLOW + "[BedrockTechnology] >> " + mes);
+        this.sender.sendMessage(Color.YELLOW + "[specialbekt] >> " + mes);
     }
 
     public void sendErr(String mes) {
-        this.sender.sendMessage(Color.DEEP_RED + "[BedrockTechnology] >> " + mes);
+        this.sender.sendMessage(Color.DEEP_RED + "[specialbekt] >> " + mes);
     }
 
     public void sendMesWithHead(String mes, String head, String color) {
-        this.sender.sendMessage(color + "[BedrockTechnology-" + head + "]" + " >> \n" + mes);
+        this.sender.sendMessage(color + "[specialbekt-" + head + "]" + " >> \n" + mes);
     }
 
     public void sendInfo(String mes) {
-        this.sender.sendMessage(Color.GREEN + "[BedrockTechnology] >> " + mes + "。");
+        this.sender.sendMessage(Color.GREEN + "[specialbekt] >> " + mes + "。");
     }
 
     public void sendMessageWithoutHead(String mes,String color) {
@@ -41,5 +41,9 @@ public class Chat {
 
     public boolean isNotNull(int index) {
         return this.args != null && this.args.length > index;
+    }
+
+    public void sendInfoWithoutHead(String mes) {
+        this.sender.sendMessage(Color.GREEN + mes);
     }
 }

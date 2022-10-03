@@ -1,9 +1,9 @@
-package me.ctimet.specialbekt;
+package io.github.ctimet.specialbekt.listener;
 
+import io.github.ctimet.specialbekt.data.stickdata.StickData;
 import io.github.thebusybiscuit.slimefun4.api.events.AndroidMineEvent;
 import io.github.thebusybiscuit.slimefun4.api.events.BlockPlacerPlaceEvent;
 import io.github.thebusybiscuit.slimefun4.api.events.ExplosiveToolBreakBlocksEvent;
-import me.ctimet.specialbekt.data.StickData;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
@@ -12,6 +12,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.*;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
 
+import java.util.List;
 import java.util.Objects;
 
 public class MachineProtectListener implements Listener {
@@ -44,10 +45,13 @@ public class MachineProtectListener implements Listener {
     }
 
     @EventHandler
-    public static void onBlockExp(BlockExpEvent event)
+    public static void onBlockExp(BlockExplodeEvent event)
     {
         //方块爆炸事件
-        exp(event.getBlock().getLocation());
+        List<Block> blocks = event.blockList();
+        for (Block block : blocks) {
+            protect(block);
+        }
     }
 
     @EventHandler
@@ -97,27 +101,6 @@ public class MachineProtectListener implements Listener {
 
         String xyz = location.getX() + "&" + location.getY() + "&" + location.getZ() + "&" + Objects.requireNonNull(location.getWorld()).getName();
 
-        StickData.remove(xyz);
-    }
-
-    //计算爆炸所伤害的方块
-    static void exp(Location location)
-    {
-        double x = location.getX();
-        double y = location.getY();
-        double z = location.getZ();
-
-        double[] xs = new double[]{x-4,x-3,x-2,x-1,x,x+1,x+2,x+3,x+4};
-        double[] ys = new double[]{y-3,y-2,y-1,y,y+1,y+2,y+3};
-        double[] zs = new double[]{z-4,z-3,z-2,z-1,z,z+1,z+2,z+3,z+4};
-
-        for (double xxs : xs) {
-            for (double yys : ys) {
-                for (double zzs : zs) {
-                    String lt = xxs + "&" + yys + "&" + zzs + "&" + Objects.requireNonNull(location.getWorld()).getName();
-                    StickData.remove(lt);
-                }
-            }
-        }
+        StickData.removeData(xyz);
     }
 }

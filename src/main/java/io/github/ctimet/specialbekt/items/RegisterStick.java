@@ -1,8 +1,8 @@
-package me.ctimet.specialbekt.items;
+package io.github.ctimet.specialbekt.items;
 
-import me.ctimet.specialbekt.log.Chat;
-import me.ctimet.specialbekt.data.StickData;
-import me.ctimet.specialbekt.log.Color;
+import io.github.ctimet.specialbekt.log.Chat;
+import io.github.ctimet.specialbekt.log.Color;
+import io.github.ctimet.specialbekt.data.stickdata.StickData;
 import io.github.thebusybiscuit.slimefun4.api.events.PlayerRightClickEvent;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
@@ -43,6 +43,11 @@ public class RegisterStick extends SlimefunItem {
             return;
         }
 
+        if (StickData.isNotReadFinish()) {
+            chat.sendWarn("抱歉，注册修复系统暂时没有读取完数据。待读取完再进行注册操作吧");
+            return;
+        }
+
         Location location = block.getLocation();
         String xyz = location.getX() + "&" + location.getY() + "&" + location.getZ() + "&" + Objects.requireNonNull(location.getWorld()).getName();
 
@@ -51,7 +56,7 @@ public class RegisterStick extends SlimefunItem {
             return;
         }
 
-        StickData.putBlockData(xyz, BlockStorage.getBlockInfoAsJson(block));
+        StickData.putData(player.getUniqueId().toString(), xyz, BlockStorage.getBlockInfoAsJson(block));
 
         chat.sendMessageWithoutHead("方块已成功注册", Color.GREEN);
     }
