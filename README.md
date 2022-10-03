@@ -3,4 +3,4 @@
 [主版本](https://github.com/CTimet/BedrockTechnology)仍保留注册修复棒，不过会加入更多东西（包括机器，玩法等）。该版本仅保留注册修复棒。<br>
 想要体验更多玩法？[点我](https://github.com/CTimet/BedrockTechnology)<br>
 <br>
-[下载SpecialBekt](https://github.com/CTimet/SpecialBekt/releases/tag/SpecialBekt_20220924f0)
+[下载SpecialBekt]https://builds.guizhanss.net/CTimet/SpecialBekt/master/)
