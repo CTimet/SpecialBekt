@@ -22,6 +22,7 @@ public class BektMain extends JavaPlugin implements SlimefunAddon {
         BItemGroup.register();
         BItems.registerItems();
         StickData.init();
+        //20221003
         Bukkit.getPluginManager().registerEvents(new MachineProtectListener(), this);
         if (cfg.getBoolean("options.auto-register"))
             Bukkit.getPluginManager().registerEvents(new AutoRegisterListener(), this);
