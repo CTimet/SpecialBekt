@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.ctimet</groupId>
     <artifactId>specialbekt</artifactId>
-    <version>1.1-20221003f1</version>
+    <version>1.1-20221004f1</version>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
